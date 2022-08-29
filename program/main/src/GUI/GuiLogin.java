@@ -7,13 +7,17 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.Font;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import java.awt.Color;
 import javax.swing.SwingConstants;
 
-public class GuiLogin{
+public class GuiLogin implements ActionListener{
 
 	private JFrame frame;
 	private JTextField txttaikhoan;
@@ -113,7 +117,29 @@ public class GuiLogin{
 		lbmatkhau.setFont(new Font("Tahoma", Font.BOLD, 15));
 		lbmatkhau.setBounds(188, 208, 77, 41);
 		frame.getContentPane().add(lbmatkhau);
+		btnlogin.addActionListener(this);
+		
 		
 
+	}
+
+	public void actionPerformed(ActionEvent e) {
+		Object o = e.getSource();
+		if (o.equals(btnlogin)) {
+			String tk = txttaikhoan.getText();
+			String mk = txtmatkhau.getText();
+			if (tk.equals("")) {
+				JOptionPane.showMessageDialog(null, "Tài Khoản Không Được Để Trống");
+			} 
+			else if(mk.equals("123456")){
+				System.out.println(tk +"/"+ mk);
+				
+			}else {
+				JOptionPane.showMessageDialog(null, "Mật Khẩu Sai");
+			}
+			
+		}
+		
+		
 	}
 }
