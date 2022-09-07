@@ -129,7 +129,7 @@ public class GuiLogin implements ActionListener{
 			String tk = txttaikhoan.getText();
 			String mk = txtmatkhau.getText();
 			if (tk.equals("")) {
-				JOptionPane.showMessageDialog(null, "Tài Khoản Không Được Để Trống");
+				JOptionPane.showMessageDialog(null, "Tài Khoản Không Được Để Trống 1");
 			} 
 			else if(mk.equals("123456")){
 				System.out.println(tk +"/"+ mk);
