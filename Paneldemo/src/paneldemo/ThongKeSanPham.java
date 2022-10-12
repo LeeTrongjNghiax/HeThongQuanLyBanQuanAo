@@ -40,7 +40,7 @@ import com.toedter.calendar.JDateChooser;
 import dao.ThongKeSLSP;
 import entity.ThongKeSoLuongSanPham;
 
-public class ThongKeSanPham extends JFrame implements ActionListener{
+public class ThongKeSanPham extends JPanel implements ActionListener{
 	Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 	int with = screenSize.width;
 	int height = screenSize.height;
@@ -56,12 +56,13 @@ public class ThongKeSanPham extends JFrame implements ActionListener{
 	private static JComboBox cbbdoituong;
 	static ThongKeSLSP tkdao = new ThongKeSLSP();
 	private DefaultTableModel modelTK;
+	private DefaultTableModel DmodelTopSp;
 	//Image imgImage = Toolkit.getDefaultToolkit().getImage("C:\\Users\\Administrator\\Downloads\\logo (2)\\logo\\logo.jpg");
 public ThongKeSanPham() {
 	setSize(with,height);
-	setLocationRelativeTo(null);
-	setDefaultCloseOperation(EXIT_ON_CLOSE);
-	setResizable(false);
+//	setLocationRelativeTo(null);
+//	setDefaultCloseOperation(EXIT_ON_CLOSE);
+//	setResizable(false);
 	panelTKcon();
 }
 private void panelTKcon() {
@@ -70,17 +71,13 @@ private void panelTKcon() {
 	pnWest.setLayout(new BoxLayout(pnWest, BoxLayout.Y_AXIS));
 	add(pnWest,BorderLayout.WEST);
 	
-//	JPanel pnNoCen = new JPanel();
-//	JPanel pnNoWest = new JPanel();
-//	pnNoCen.setLayout(new BoxLayout(pnNoCen, BoxLayout.Y_AXIS));
-//	pnNoWest.setLayout(new BoxLayout(pnNoWest, BoxLayout.Y_AXIS));
-//pnNoCen.add(lbtitle);
+
 	JPanel pncenHD = new JPanel();
 	JPanel pncenTien = new JPanel();
 	
 	
 	JPanel pnwChucNang = new JPanel();
-	pnwChucNang.add(Box.createVerticalStrut(100));
+//	pnwChucNang.add(Box.createVerticalStrut(100));
 	pnwChucNang.setBorder(BorderFactory.createTitledBorder("Chức Năng"));
 	pnWest.add(pnwChucNang);
 	JPanel pnwFrom = new JPanel();
@@ -101,6 +98,15 @@ private void panelTKcon() {
 	pwnTo.add(lbto);
 	pwnTo.add(Todate);
 	pnwChucNang.add(pwnTo);
+	
+	DmodelTopSp = new DefaultTableModel();
+	DmodelTopSp.addColumn("Tên Sản Phẩm");
+	DmodelTopSp.addColumn("Số Tiền");
+	JTable tableTOPSP = new JTable(DmodelTopSp);
+	JScrollPane sctopSP = new JScrollPane(tableTOPSP);
+	pnWest.add(sctopSP);
+	pnWest.setPreferredSize(new Dimension(220, 700));
+//	pnwChucNang.setPreferredSize(new Dimension(250, 500));
 	pnwChucNang.add(Box.createVerticalStrut(30));
 	
 	
@@ -128,13 +134,13 @@ private void panelTKcon() {
 	lbto.setPreferredSize(lbDoiTuong.getPreferredSize());
 	lbfrom.setPreferredSize(lbDoiTuong.getPreferredSize());
 	pnWest.add(Box.createVerticalStrut(50));
-	pnwChucNang.setPreferredSize(new Dimension(400,500));
+	pnwChucNang.setPreferredSize(new Dimension(300,330));
 	
 	// PANEL CENTER
 	JPanel pnCenter = new JPanel();
 	pnCenter.setLayout(new BoxLayout(pnCenter, BoxLayout.Y_AXIS));
 	add(pnCenter,BorderLayout.CENTER);
-	pnCenter.add(Box.createVerticalStrut(190));
+//	pnCenter.add(Box.createVerticalStrut(190));
 	JLabel lbtitle = new JLabel("THỐNG KÊ SẢN PHẨM");
 	lbtitle.setFont(new Font("Helvetica Neue", Font.BOLD, 30));
 	pnCenter.add(lbtitle);
@@ -162,7 +168,7 @@ private void panelTKcon() {
 	modelTK.addColumn("Số Tiền Thu Được");
 	JTable tableTKDT = new JTable(modelTK);
 	JScrollPane scrollPane = new JScrollPane(tableTKDT);
-	scrollPane.setPreferredSize(new Dimension(700, 500));
+	scrollPane.setPreferredSize(new Dimension(500, 700));
 	pnCenter.add(scrollPane);
 //	
 //	pnNoWest.setPreferredSize(new Dimension(200, 300));
@@ -179,15 +185,13 @@ private void panelTKcon() {
 	pnEast.setLayout(new BoxLayout(pnEast, BoxLayout.Y_AXIS));
 	add(pnEast,BorderLayout.EAST);
 	pnEast.setBorder(BorderFactory.createTitledBorder("Bảng Thống Kê Sản Phẩm Bán Được"));
-	pnEast.setPreferredSize(new Dimension(500, 600));
+	pnEast.setPreferredSize(new Dimension(600, 770));
 	
 	lbtongtien.setPreferredSize(lbtonghd.getPreferredSize());
 	btnTimTKDT.addActionListener(this);
 	btnInTKDT.addActionListener(this);
 }
-public static void main(String[] args) {
-	new ThongKeSanPham().setVisible(true);
-}
+
  public static JFreeChart createChart() {
         JFreeChart barChart = ChartFactory.createBarChart(
                 "BIỂU ĐỒ SẢN PHẨM BÁN ĐƯỢC",
@@ -258,14 +262,18 @@ public static void main(String[] args) {
 			    String listString[] = dateString.split(":");
 				BufferedImage img = new BufferedImage(pnEast.getWidth(), pnEast.getHeight(), BufferedImage.TYPE_INT_RGB);
 			    pnEast.paint(img.getGraphics());
-			    try {
-			        ImageIO.write(img, "png", new File("..\\Paneldemo\\TKSP"+listString[0]+listString[1]+listString[2]+".png"));
-			        JOptionPane.showMessageDialog(null,"Xuất Thống Kê Sản Phẩm Thành Công");
+			    String doituong  = cbbdoituong.getSelectedItem().toString();
+			    if (doituong.equals("Áo Sơ Mi")) {
+			    	try {
+				        ImageIO.write(img, "png", new File("..\\Paneldemo\\ASM"+listString[0]+listString[1]+listString[2]+".png"));
+				        JOptionPane.showMessageDialog(null,"Xuất Thống Kê Sản Phẩm Thành Công");
 
-			    } catch (Exception e1) {
+				    } catch (Exception e1) {
+				} }else {
+					System.out.println(1);
+				}
 			        
 		}
 	}
 }
 
-}
