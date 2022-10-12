@@ -1,6 +1,7 @@
 package paneldemo;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -51,11 +52,9 @@ import com.toedter.calendar.JDateChooser;
 import dao.Thongke_DAO;
 import entity.ThongKeDoanhThu;
 
-public class panelThongKe extends JFrame implements ActionListener{
-		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-		int with = screenSize.width;
-		int height = screenSize.height;
-		ImageIcon icon = new ImageIcon("C:\\Users\\Administrator\\Downloads\\logo (2)\\logo\\logo.jpg");
+public class panelThongKe extends JPanel implements ActionListener{
+		
+	
 		private static JDateChooser Fromdate;
 		private static JDateChooser Todate;
 		private JButton btnTimTKDT;
@@ -72,14 +71,15 @@ public class panelThongKe extends JFrame implements ActionListener{
 		private JScrollPane scrollPane;
 		//Image imgImage = Toolkit.getDefaultToolkit().getImage("C:\\Users\\Administrator\\Downloads\\logo (2)\\logo\\logo.jpg");
 	public panelThongKe() {
-		setSize(with,height);
-		setLocationRelativeTo(null);
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		setResizable(false);
+//		setSize(with,height);
+//		setLocationRelativeTo(null);
+//		setDefaultCloseOperation(EXIT_ON_CLOSE);
+//		setResizable(false);
 		panelTKcon();
 	}
 	private void panelTKcon() {
 		// PANEL WEST
+		setBackground(new Color(147,190,222));
 		JPanel pnWest = new JPanel();
 		pnWest.setLayout(new BoxLayout(pnWest, BoxLayout.Y_AXIS));
 		add(pnWest,BorderLayout.WEST);
@@ -91,22 +91,25 @@ public class panelThongKe extends JFrame implements ActionListener{
 //	pnNoCen.add(lbtitle);
 		JPanel pncenHD = new JPanel();
 		JPanel pncenTien = new JPanel();
-		JLabel lbicon = new JLabel(icon);
-		pnWest.add(lbicon);
+//		JLabel lbicon = new JLabel(icon);
+//		pnWest.add(lbicon);
 		JPanel pnwChucNang = new JPanel();
 		pnwChucNang.setBorder(BorderFactory.createTitledBorder("Chức Năng"));
 		pnWest.add(pnwChucNang);
 		JPanel pnwFrom = new JPanel();
 		pnwChucNang.setLayout(new BoxLayout(pnwChucNang, BoxLayout.Y_AXIS));
+		pnwChucNang.setBackground(new Color(147,190,222));
 		
 		JLabel lbfrom = new JLabel("Từ: ");
 		pnwFrom.setLayout(new BoxLayout(pnwFrom,BoxLayout.X_AXIS));
 		Fromdate = new JDateChooser();
 		java.sql.Date date = new java.sql.Date(2017-1900, 12-1, 30);
 		Fromdate.setDate(date);
+		lbfrom.setBackground(new Color(147,190,222));
 		pnwFrom.add(lbfrom);
 		pnwFrom.add(Fromdate);
 		pnwChucNang.add(pnwFrom);
+		pnwFrom.setBackground(new Color(147,190,222));
 		pnwChucNang.add(Box.createVerticalStrut(30));
 		
 		JPanel pwnTo = new JPanel();
@@ -117,7 +120,9 @@ public class panelThongKe extends JFrame implements ActionListener{
 		Todate.setDate(date1);
 		pwnTo.add(lbto);
 		pwnTo.add(Todate);
+		pwnTo.setBackground(new Color(147,190,222));
 		pnwChucNang.add(pwnTo);
+		pnwChucNang.setPreferredSize(new Dimension(250,200));
 		pnwChucNang.add(Box.createVerticalStrut(30));
 		
 		
@@ -131,58 +136,70 @@ public class panelThongKe extends JFrame implements ActionListener{
 		pwnDoiTuong.add(cbbdoituong);
 		pnwChucNang.add(pwnDoiTuong);
 		pnwChucNang.add(Box.createVerticalStrut(30));
+		pwnDoiTuong.setBackground(new Color(147,190,222));
 		
 		btnTimTKDT = new JButton("Tìm Kiếm");
 		btnInTKDT = new JButton("In Thống Kê");
 		pnbtn = new JPanel();
 		pnbtn.setLayout(new BoxLayout(pnbtn,BoxLayout.X_AXIS));
 		pnbtn.add(btnTimTKDT);
+		pnbtn.setBackground(new Color(147,190,222));
 		pnbtn.add(Box.createHorizontalStrut(20));
 		pnbtn.add(btnInTKDT);
 		pnwChucNang.add(pnbtn);
 		pnwChucNang.add(Box.createVerticalStrut(380));
 		lbto.setPreferredSize(lbDoiTuong.getPreferredSize());
 		lbfrom.setPreferredSize(lbDoiTuong.getPreferredSize());
-		pnWest.add(Box.createVerticalStrut(50));
+		DefaultTableModel modelTopNV = new DefaultTableModel();
+		modelTopNV.addColumn("Họ Và Tên");
+		modelTopNV.addColumn("Số Tiền Thu/Nhận Được");
+		JTable tableTOPNV = new JTable(modelTopNV);
+		JScrollPane sctopNV = new JScrollPane(tableTOPNV);
+		pnWest.add(sctopNV);
+		pnWest.setPreferredSize(new Dimension(230,750));
+//		pnWest.add(Box.createVerticalStrut(50));
 		
 		// PANEL CENTER
 		JPanel pnCenter = new JPanel();
 		pnCenter.setLayout(new BoxLayout(pnCenter, BoxLayout.Y_AXIS));
 		add(pnCenter,BorderLayout.CENTER);
-		pnCenter.add(Box.createVerticalStrut(190));
+//		pnCenter.add(Box.createVerticalStrut(190));
 		JLabel lbtitle = new JLabel("THỐNG KÊ DOANH THU");
-		lbtitle.setFont(new Font("Helvetica Neue", Font.BOLD, 30));
+		lbtitle.setFont(new Font("Helvetica Neue", Font.BOLD, 33));
 		pnCenter.add(lbtitle);
 		pnCenter.add(Box.createVerticalStrut(15));
+		pnCenter.setBackground(new Color(147,190,222));
 		pncenHD.setLayout(new BoxLayout(pncenHD,BoxLayout.X_AXIS));
 		pncenTien.setLayout(new BoxLayout(pncenTien,BoxLayout.X_AXIS));
+
 		lbtonghd = new JLabel("Tổng Số Hoá Đơn");
 		txttongHD = new JTextField();
 		JLabel lbtongtien = new JLabel("Tổng Số Tiền");
+		lbtongtien.setBackground(new Color(147,190,222));
 		txttongtien = new JTextField();
 		txttongHD.setEnabled(false);
 		txttongtien.setEnabled(false);
 		pncenHD.add(lbtonghd);
 		pncenHD.add(txttongHD);
+		pncenHD.setBackground(new Color(147,190,222));
 		pncenTien.add(lbtongtien);
 		pncenTien.add(txttongtien);
+		pnCenter.setBackground(new Color(147,190,222));
 		pnCenter.add(pncenHD);
 		pnCenter.add(Box.createVerticalStrut(15));
 		pnCenter.add(pncenTien);
+		pncenTien.setBackground(new Color(147,190,222));
 		pnCenter.add(Box.createVerticalStrut(15));
 		pnCenter.add(new JLabel("BẢNG THỐNG KÊ"));
 		modelTK = new DefaultTableModel();
 		modelTK.addColumn("Tên");
 		modelTK.addColumn("Số Lượng Hoá Đơn: ");
 		modelTK.addColumn("Số Tiền Thu Được");
-//		Object []object = {"Toán",1,20000};
-//		Object []object1 = {"Toán",2,20000};
-//		modelTK.addRow(object);
-//		modelTK.addRow(object1);
+
 		tableTKDT = new JTable(modelTK);
 		tableTKDT.setFillsViewportHeight(true);
 		scrollPane = new JScrollPane(tableTKDT);
-		scrollPane.setPreferredSize(new Dimension(700, 500));
+		scrollPane.setPreferredSize(new Dimension(520, 700));
 		pnCenter.add(scrollPane);
 //		
 //		pnNoWest.setPreferredSize(new Dimension(200, 300));
@@ -195,7 +212,8 @@ public class panelThongKe extends JFrame implements ActionListener{
 		pnEast.setLayout(new BoxLayout(pnEast, BoxLayout.Y_AXIS));
 		add(pnEast,BorderLayout.EAST);
 		pnEast.setBorder(BorderFactory.createTitledBorder("Bảng Thống Kê"));
-		pnEast.setPreferredSize(new Dimension(500, 600));
+		pnEast.setPreferredSize(new Dimension(615, 791));
+		pnEast.add(Box.createVerticalStrut(300));
 		
 		lbtongtien.setPreferredSize(lbtonghd.getPreferredSize());
 		btnTimTKDT.addActionListener(this);
