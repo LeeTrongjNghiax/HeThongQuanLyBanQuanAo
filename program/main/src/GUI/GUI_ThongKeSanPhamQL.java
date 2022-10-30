@@ -40,10 +40,11 @@ import org.jfree.data.category.DefaultCategoryDataset;
 
 import com.toedter.calendar.JDateChooser;
 
-//import com.toedter.calendar.JDateChooser;
-//
-//import dao.ThongKeSLSP;
-//import entity.ThongKeSoLuongSanPham;
+import DAO.ThongKeSoLuongSanPham_Dao;
+
+import com.toedter.calendar.JDateChooser;
+
+import entity.ThongKeSoLuongSanPham;
 
 
 public class GUI_ThongKeSanPhamQL extends JPanel implements ActionListener{
@@ -60,7 +61,7 @@ public class GUI_ThongKeSanPhamQL extends JPanel implements ActionListener{
 	private JTextField txttongHD;
 	private JTextField txttongtien;
 	private static JComboBox cbbdoituong;
-//	static ThongKeSLSP tkdao = new ThongKeSLSP();
+	static ThongKeSoLuongSanPham_Dao tkdao = new ThongKeSoLuongSanPham_Dao();
 	private DefaultTableModel modelTK;
 	private DefaultTableModel DmodelTopSp;
 	private JPanel pnCenterTxt;
@@ -236,9 +237,9 @@ public class GUI_ThongKeSanPhamQL extends JPanel implements ActionListener{
 			String DateDen = spDateFormat.format(Todate.getDate());
 			java.sql.Date ngayMocDate = java.sql.Date.valueOf(DateMoc);
 			java.sql.Date DateDenDate = java.sql.Date.valueOf(DateDen);
-//			for (ThongKeSoLuongSanPham tKeSoLuongSanPham : tkdao.ThongKeSoLuongSp(doituong,ngayMocDate,DateDenDate)) {
-//				dataset.addValue(tKeSoLuongSanPham.getSoLuong(), "Số Lượng Sản Phẩm", tKeSoLuongSanPham.getSp());
-//			}
+			for (ThongKeSoLuongSanPham tKeSoLuongSanPham : tkdao.ThongKeSoLuongSp(doituong,ngayMocDate,DateDenDate)) {
+				dataset.addValue(tKeSoLuongSanPham.getSoLuong(), "Số Lượng Sản Phẩm", tKeSoLuongSanPham.getSp());
+			}
 
 		} catch (Exception e) {
 
@@ -267,93 +268,89 @@ public class GUI_ThongKeSanPhamQL extends JPanel implements ActionListener{
 
 		return true;
 	}
-//	@Override
-//	public void actionPerformed(ActionEvent e) {
-//		Object o = e.getSource();
-//		if (o.equals(btnTimTKDT)) {
-//			SimpleDateFormat spDateFormat = new SimpleDateFormat("dd/MM/yyyy");
-//			if (!CheckFormTKSP()) {
-//				return;
-//			}
-//			else {
-//				ChartPanel chartPanel = new ChartPanel(createChart());
-//				pnEast.removeAll();
-//				pnEast.revalidate();
-//				pnEast.repaint();
-//				pnEast.add(chartPanel);
-//				String doituong  = cbbdoituong.getSelectedItem().toString();
-//				while(modelTK.getRowCount()!=0) {
-//					modelTK.removeRow(0);
-//				}
-//				while (modelTopSP.getRowCount()!=0) {
-//					modelTopSP.removeRow(0);
-//				}
-//
-//				SimpleDateFormat spDateFormat1 = new SimpleDateFormat("yyyy-MM-dd");
-//				String DateMoc = spDateFormat1.format(Fromdate.getDate());
-//				String DateDen = spDateFormat1.format(Todate.getDate());
-//
-//
-//				java.sql.Date ngayMocDate = java.sql.Date.valueOf(DateMoc);
-//				java.sql.Date DateDenDate = java.sql.Date.valueOf(DateDen);
-//
-//				for (ThongKeSoLuongSanPham tKeSoLuongSanPham : tkdao.ThongKeSoLuongSp(doituong,ngayMocDate,DateDenDate)) {
-//					Object opp[] = {tKeSoLuongSanPham.getSp(),tKeSoLuongSanPham.getSoLuong(),tKeSoLuongSanPham.getDoanhthu()};
-//					modelTK.addRow(opp);
-//				}
-//				DecimalFormat TopDoanhThu = new DecimalFormat("###,###.000VNĐ");
-//				for (ThongKeSoLuongSanPham tksp: tkdao.ThongKeSoLuongSpTheoTop(doituong,ngayMocDate,DateDenDate)) {
-//
-//					Object oppTop[] = {tksp.getSp(),TopDoanhThu.format(tksp.getDoanhthu()) };
-//					modelTopSP.addRow(oppTop);
-//				}
-//				int total = 0;
-//				double totaltien = 0;
-//				for (int i = 0; i < modelTK.getRowCount(); i++) {
-//					int sum =  (int) tableTKDT.getValueAt(i, 1);
-//					Double sumtien =  (Double) tableTKDT.getValueAt(i, 2);
-//					total += sum;
-//					totaltien += sumtien;
-//				}
-//				DecimalFormat deci = new DecimalFormat("###,###.000VND");
-//
-//				String stringhd= Integer.toString(total);
-//				String stringtien = Double.toString(totaltien);
-//
-//
-//				txttongtien.setText("");
-//				txttongHD.setText("");
-//				txttongtien.setText(deci.format(Double.parseDouble(stringtien)));
-//				txttongHD.setText(stringhd);
-//
-//			}
-//
-//		}
-//
-//		if (o.equals(btnInTKDT)) {
-//			Date date = new Date();
-//			SimpleDateFormat spDateFormat = new SimpleDateFormat("hh:mm:ss");
-//			String dateString = spDateFormat.format(date);
-//			String listString[] = dateString.split(":");
-//			BufferedImage img = new BufferedImage(pnEast.getWidth(), pnEast.getHeight(), BufferedImage.TYPE_INT_RGB);
-//			pnEast.paint(img.getGraphics());
-//			String doituong  = cbbdoituong.getSelectedItem().toString();
-//			if (doituong.equals("Áo So Mi")) {
-//				try {
-//					ImageIO.write(img, "png", new File("..\\Downloads\\ASM"+listString[0]+listString[1]+listString[2]+".png"));
-//					JOptionPane.showMessageDialog(null,"Xuất Thống Kê Sản Phẩm Thành Công");
-//
-//				} catch (Exception e1) {
-//				}
-//			}
-//
-//		}
-//	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		
+		Object o = e.getSource();
+		if (o.equals(btnTimTKDT)) {
+			SimpleDateFormat spDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+			if (!CheckFormTKSP()) {
+				return;
+			}
+			else {
+				ChartPanel chartPanel = new ChartPanel(createChart());
+				pnEast.removeAll();
+				pnEast.revalidate();
+				pnEast.repaint();
+				pnEast.add(chartPanel);
+				String doituong  = cbbdoituong.getSelectedItem().toString();
+				while(modelTK.getRowCount()!=0) {
+					modelTK.removeRow(0);
+				}
+				while (modelTopSP.getRowCount()!=0) {
+					modelTopSP.removeRow(0);
+				}
+
+				SimpleDateFormat spDateFormat1 = new SimpleDateFormat("yyyy-MM-dd");
+				String DateMoc = spDateFormat1.format(Fromdate.getDate());
+				String DateDen = spDateFormat1.format(Todate.getDate());
+
+
+				java.sql.Date ngayMocDate = java.sql.Date.valueOf(DateMoc);
+				java.sql.Date DateDenDate = java.sql.Date.valueOf(DateDen);
+
+				for (ThongKeSoLuongSanPham tKeSoLuongSanPham : tkdao.ThongKeSoLuongSp(doituong,ngayMocDate,DateDenDate)) {
+					Object opp[] = {tKeSoLuongSanPham.getSp(),tKeSoLuongSanPham.getSoLuong(),tKeSoLuongSanPham.getDoanhthu()};
+					modelTK.addRow(opp);
+				}
+				DecimalFormat TopDoanhThu = new DecimalFormat("###,###.000VNĐ");
+				for (ThongKeSoLuongSanPham tksp: tkdao.ThongKeSoLuongSpTheoTop(doituong,ngayMocDate,DateDenDate)) {
+
+					Object oppTop[] = {tksp.getSp(),TopDoanhThu.format(tksp.getDoanhthu()) };
+					modelTopSP.addRow(oppTop);
+				}
+				int total = 0;
+				double totaltien = 0;
+				for (int i = 0; i < modelTK.getRowCount(); i++) {
+					int sum =  (int) tableTKDT.getValueAt(i, 1);
+					Double sumtien =  (Double) tableTKDT.getValueAt(i, 2);
+					total += sum;
+					totaltien += sumtien;
+				}
+				DecimalFormat deci = new DecimalFormat("###,###.000VND");
+
+				String stringhd= Integer.toString(total);
+				String stringtien = Double.toString(totaltien);
+
+
+				txttongtien.setText("");
+				txttongHD.setText("");
+				txttongtien.setText(deci.format(Double.parseDouble(stringtien)));
+				txttongHD.setText(stringhd);
+
+			}
+
+		}
+
+		if (o.equals(btnInTKDT)) {
+			Date date = new Date();
+			SimpleDateFormat spDateFormat = new SimpleDateFormat("hh:mm:ss");
+			String dateString = spDateFormat.format(date);
+			String listString[] = dateString.split(":");
+			BufferedImage img = new BufferedImage(pnEast.getWidth(), pnEast.getHeight(), BufferedImage.TYPE_INT_RGB);
+			pnEast.paint(img.getGraphics());
+			String doituong  = cbbdoituong.getSelectedItem().toString();
+			if (doituong.equals("Áo So Mi")) {
+				try {
+					ImageIO.write(img, "png", new File("..\\Downloads\\ASM"+listString[0]+listString[1]+listString[2]+".png"));
+					JOptionPane.showMessageDialog(null,"Xuất Thống Kê Sản Phẩm Thành Công");
+
+				} catch (Exception e1) {
+				}
+			}
+
+		}
 	}
+
 
 //	
 //		public boolean regexNV() {
