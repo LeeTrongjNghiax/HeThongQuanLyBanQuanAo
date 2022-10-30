@@ -18,7 +18,6 @@ public class NhanVien_DAO {
 	public ArrayList<NhanVien>getAllNhanVien(){
 
 		try {
-			Connect_DB.getInstance();
 			Connection con= Connect_DB.getInstance().getConnection();
 			String sql="Select* from NhanVien";
 			Statement statement= con.createStatement();
@@ -26,18 +25,18 @@ public class NhanVien_DAO {
 			while(rs.next()) {
 				String maNhanVien = rs.getString(1);
 				String tenNhanVien = rs.getString(2);
-				String soDienThoai = rs.getString(3);
-				Boolean gioiTinh=rs.getBoolean(4);
 				Date ngaySinh =  rs.getDate(5);
+				Boolean gioiTinh=rs.getBoolean(4);
+				String diaChi= rs.getString(13);
+				String soDienThoai = rs.getString(3);
 				String email = rs.getString(6);
+				String chucVu =  rs.getString(9);
 				Date ngayVaoLam = rs.getDate(7);
 				String chungMinhNhanDan = rs.getString(8);
-				String chucVu =  rs.getString(9);
-				String thanhPho = rs.getString(10);
-				String quan = rs.getString(11);
-				String phuong = rs.getString(12);
-				String diaChi= rs.getString(13);
-				NhanVien nv=new NhanVien(maNhanVien, tenNhanVien, ngaySinh, gioiTinh, diaChi, phuong, quan, thanhPho, chungMinhNhanDan, soDienThoai, email, ngayVaoLam, chucVu);
+				// String thanhPho = rs.getString(10);
+				// String quan = rs.getString(11);
+				// String phuong = rs.getString(12);
+				NhanVien nv=new NhanVien(maNhanVien, tenNhanVien, ngaySinh, gioiTinh, diaChi, chungMinhNhanDan, soDienThoai, email, ngayVaoLam, chucVu);
 				dsnv.add(nv);
 			}
 
