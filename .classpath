@@ -1,12 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
+<<<<<<< HEAD
+	<classpathentry excluding=".settings/|program/" kind="src" path=""/>
+	<classpathentry kind="lib" path=".settings"/>
+	<classpathentry kind="lib" path="program"/>
+=======
 	<classpathentry kind="src" path="program/main/src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="program/main/libs/sqljdbc4.jar"/>
+<<<<<<< HEAD
+	<classpathentry kind="lib" path="C:/Users/LeeTrongjNghiax/OneDrive - Industrial University of HoChiMinh City/year3/HK1/phatTrienUngDung/homeworks/HeThongQuanLyBanQuanAo/libs/hamcrest-core-1.3.jar"/>
+	<classpathentry kind="lib" path="C:/Users/LeeTrongjNghiax/OneDrive - Industrial University of HoChiMinh City/year3/HK1/phatTrienUngDung/homeworks/HeThongQuanLyBanQuanAo/libs/jcalendar-1.4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/LeeTrongjNghiax/OneDrive - Industrial University of HoChiMinh City/year3/HK1/phatTrienUngDung/homeworks/HeThongQuanLyBanQuanAo/libs/jcommon-1.0.23.jar"/>
+	<classpathentry kind="lib" path="C:/Users/LeeTrongjNghiax/OneDrive - Industrial University of HoChiMinh City/year3/HK1/phatTrienUngDung/homeworks/HeThongQuanLyBanQuanAo/libs/jfreechart-1.0.19.jar"/>
+	<classpathentry kind="lib" path="C:/Users/LeeTrongjNghiax/OneDrive - Industrial University of HoChiMinh City/year3/HK1/phatTrienUngDung/homeworks/HeThongQuanLyBanQuanAo/libs/jfreechart-1.0.19-experimental.jar"/>
+	<classpathentry kind="lib" path="C:/Users/LeeTrongjNghiax/OneDrive - Industrial University of HoChiMinh City/year3/HK1/phatTrienUngDung/homeworks/HeThongQuanLyBanQuanAo/libs/jfreechart-1.0.19-swt.jar"/>
+	<classpathentry kind="lib" path="C:/Users/LeeTrongjNghiax/OneDrive - Industrial University of HoChiMinh City/year3/HK1/phatTrienUngDung/homeworks/HeThongQuanLyBanQuanAo/libs/jfreesvg-2.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/LeeTrongjNghiax/OneDrive - Industrial University of HoChiMinh City/year3/HK1/phatTrienUngDung/homeworks/HeThongQuanLyBanQuanAo/libs/jgoodies-common-1.2.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/LeeTrongjNghiax/OneDrive - Industrial University of HoChiMinh City/year3/HK1/phatTrienUngDung/homeworks/HeThongQuanLyBanQuanAo/libs/jgoodies-looks-2.4.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/LeeTrongjNghiax/OneDrive - Industrial University of HoChiMinh City/year3/HK1/phatTrienUngDung/homeworks/HeThongQuanLyBanQuanAo/libs/junit-4.6.jar"/>
+	<classpathentry kind="lib" path="C:/Users/LeeTrongjNghiax/OneDrive - Industrial University of HoChiMinh City/year3/HK1/phatTrienUngDung/homeworks/HeThongQuanLyBanQuanAo/libs/junit-4.11.jar"/>
+	<classpathentry kind="lib" path="C:/Users/LeeTrongjNghiax/OneDrive - Industrial University of HoChiMinh City/year3/HK1/phatTrienUngDung/homeworks/HeThongQuanLyBanQuanAo/libs/orsoncharts-1.4-eval-nofx.jar"/>
+	<classpathentry kind="lib" path="C:/Users/LeeTrongjNghiax/OneDrive - Industrial University of HoChiMinh City/year3/HK1/phatTrienUngDung/homeworks/HeThongQuanLyBanQuanAo/libs/orsonpdf-1.6-eval.jar"/>
+	<classpathentry kind="lib" path="C:/Users/LeeTrongjNghiax/OneDrive - Industrial University of HoChiMinh City/year3/HK1/phatTrienUngDung/homeworks/HeThongQuanLyBanQuanAo/libs/servlet.jar"/>
+	<classpathentry kind="lib" path="C:/Users/LeeTrongjNghiax/OneDrive - Industrial University of HoChiMinh City/year3/HK1/phatTrienUngDung/homeworks/HeThongQuanLyBanQuanAo/libs/sqljdbc4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/LeeTrongjNghiax/OneDrive - Industrial University of HoChiMinh City/year3/HK1/phatTrienUngDung/homeworks/HeThongQuanLyBanQuanAo/libs/swtgraphics2d.jar"/>
+=======
 	<classpathentry kind="lib" path="C:/Users/Administrator/Downloads/jcalendar-1.4/lib/jcalendar-1.4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Administrator/Documents/sqljdbc42.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Administrator/Documents/Zalo Received Files/itextpdf-5.5.9.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Administrator/Desktop/jfreechart-1.0.19/lib/hamcrest-core-1.3.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Administrator/Desktop/jfreechart-1.0.19/lib/jcommon-1.0.23.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Administrator/Desktop/jfreechart-1.0.19/lib/jfreechart-1.0.19.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Administrator/Desktop/jfreechart-1.0.19/lib/jfreechart-1.0.19-experimental.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Administrator/Desktop/jfreechart-1.0.19/lib/jfreechart-1.0.19-swt.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Administrator/Desktop/jfreechart-1.0.19/lib/jfreesvg-2.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Administrator/Desktop/jfreechart-1.0.19/lib/junit-4.11.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Administrator/Desktop/jfreechart-1.0.19/lib/orsoncharts-1.4-eval-nofx.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Administrator/Desktop/jfreechart-1.0.19/lib/orsonpdf-1.6-eval.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Administrator/Desktop/jfreechart-1.0.19/lib/servlet.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Administrator/Desktop/jfreechart-1.0.19/lib/swtgraphics2d.jar"/>
+>>>>>>> 0d64f58641a82c84673fdc81059709a4901ebd7c
+>>>>>>> 923651bc53868bb0af564759a543fdc9e95f9e6a
 	<classpathentry kind="output" path="bin"/>
 </classpath>

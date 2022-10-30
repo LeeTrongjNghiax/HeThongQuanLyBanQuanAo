@@ -41,6 +41,8 @@ import org.jfree.chart.ChartPanel;
 
 import com.toedter.calendar.JDateChooser;
 
+import DAO.ThongKeDoanhThu_Dao;
+import entity.ThongKeDoanhThu;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
@@ -67,7 +69,7 @@ public class GUI_ThongKeDoanhThuQL extends JPanel implements ActionListener{
 	private JLabel lbtonghd;
 	private JTextField txttongHD;
 	private static JComboBox cbbdoituong;
-//	static Thongke_DAO tkDao = new Thongke_DAO();
+	static ThongKeDoanhThu_Dao tkDao = new ThongKeDoanhThu_Dao();
 	private JTable tableTKDT;
 	private DefaultTableModel modelTK;
 	private JScrollPane scrollPane;
@@ -283,35 +285,23 @@ public class GUI_ThongKeDoanhThuQL extends JPanel implements ActionListener{
 					String DateDen = spDateFormat.format(Todate.getDate());
 					java.sql.Date ngayMocDate = java.sql.Date.valueOf(DateMoc);
 					java.sql.Date DateDenDate = java.sql.Date.valueOf(DateDen);
-//					for (ThongKeDoanhThu thongKeDoanhThu : tkDao.thongKeDoanhThuNV(ngayMocDate, DateDenDate)) {
-//						Object row[] = {thongKeDoanhThu.getDoiTuong(),thongKeDoanhThu.getSoluongHoDon(),thongKeDoanhThu.getSoTien()};
-//						modelTK.addRow(row);
-//
-//					}
-//					DecimalFormat topDoanhThu = new DecimalFormat("###,###.000VNĐ");
-//					for (ThongKeDoanhThu tkdtTopDoanhThu : tkDao.thongKeDoanhThuTOPNV(ngayMocDate, DateDenDate)) {
-//						Object row[] = {tkdtTopDoanhThu.getDoiTuong(),topDoanhThu.format(tkdtTopDoanhThu.getSoTien())};
-//						modelTopNV.addRow(row);
-//
-//					}
+					for (ThongKeDoanhThu thongKeDoanhThu : tkDao.thongKeDoanhThuNV(ngayMocDate, DateDenDate)) {
+						Object row[] = {thongKeDoanhThu.getDoiTuong(),thongKeDoanhThu.getSoluongHoDon(),thongKeDoanhThu.getSoTien()};
+						modelTK.addRow(row);
+
+					}
+					DecimalFormat topDoanhThu = new DecimalFormat("###,###.000VNĐ");
+					for (ThongKeDoanhThu tkdtTopDoanhThu : tkDao.thongKeDoanhThuTOPNV(ngayMocDate, DateDenDate)) {
+						Object row[] = {tkdtTopDoanhThu.getDoiTuong(),topDoanhThu.format(tkdtTopDoanhThu.getSoTien())};
+						modelTopNV.addRow(row);
+
+					}
 					FillInText();
 				} else {
 					lammoitable();
 
-					String DateMoc = spDateFormat.format(Fromdate.getDate());
-					String DateDen = spDateFormat.format(Todate.getDate());
-					java.sql.Date ngayMocDate = java.sql.Date.valueOf(DateMoc);
-					java.sql.Date DateDenDate = java.sql.Date.valueOf(DateDen);
-//					for (ThongKeDoanhThu thongKeDoanhThu : tkDao.thongKeDoanhThuKH(ngayMocDate, DateDenDate)) {
-//						Object row[] = {thongKeDoanhThu.getDoiTuong(),thongKeDoanhThu.getSoluongHoDon(),thongKeDoanhThu.getSoTien()};
-//						modelTK.addRow(row);
-//
-//					}
-//					for (ThongKeDoanhThu tkdtTopDoanhThu : tkDao.thongKeTOPDoanhThuKH(ngayMocDate, DateDenDate)) {
-//						Object row[] = {tkdtTopDoanhThu.getDoiTuong(),tkdtTopDoanhThu.getSoTien()};
-//						modelTopNV.addRow(row);
-//
-//					}
+					load();
+					
 					FillInText();
 
 				}
@@ -384,6 +374,22 @@ public class GUI_ThongKeDoanhThuQL extends JPanel implements ActionListener{
 		}
 
 		return true;
+	}
+	public void load() {
+		String DateMoc = spDateFormat.format(Fromdate.getDate());
+		String DateDen = spDateFormat.format(Todate.getDate());
+		java.sql.Date ngayMocDate = java.sql.Date.valueOf(DateMoc);
+		java.sql.Date DateDenDate = java.sql.Date.valueOf(DateDen);
+		for (ThongKeDoanhThu thongKeDoanhThu : tkDao.thongKeDoanhThuKH(ngayMocDate, DateDenDate)) {
+			Object row[] = {thongKeDoanhThu.getDoiTuong(),thongKeDoanhThu.getSoluongHoDon(),thongKeDoanhThu.getSoTien()};
+			modelTK.addRow(row);
+
+		}
+		for (ThongKeDoanhThu tkdtTopDoanhThu : tkDao.thongKeTOPDoanhThuKH(ngayMocDate, DateDenDate)) {
+			Object row[] = {tkdtTopDoanhThu.getDoiTuong(),tkdtTopDoanhThu.getSoTien()};
+			modelTopNV.addRow(row);
+
+		}
 	}
 }
 
