@@ -8,6 +8,8 @@ CREATE TABLE NhanVien(
 	soDienThoai NVARCHAR(10) NOT NULL,
 	gioiTinh BIT NOT NULL,
 	ngaySinh DATE NOT NULL,
+	gioiTinh BIT NOT NULL,
+	ngaySinh DATE NOT NULL,
 	email NVARCHAR(100) NOT NULL,
 	ngayVaoLam DATE NOT NULL,
 	chungMinhNhanDan NVARCHAR(12) NOT NULL,
@@ -17,6 +19,7 @@ CREATE TABLE NhanVien(
 	huyen NVARCHAR(100) NOT NULL,
 	diaChi NVARCHAR(100) NOT NULL
 )
+
 
 CREATE TABLE KhachHang(
 	maKhachHang NVARCHAR(30) PRIMARY KEY,
@@ -31,10 +34,7 @@ CREATE TABLE KhachHang(
 CREATE TABLE TaiKhoan(
 	tenTaiKhoan NVARCHAR(30) PRIMARY KEY,
 	matKhau NVARCHAR(50) NOT NULL,
-	maKhachHang NVARCHAR(30) NOT NULL,
 	maNhanVien NVARCHAR(30) NOT NULL,
-
-	FOREIGN KEY (maKhachHang) REFERENCES KhachHang(maKhachHang) on delete cascade,
 	FOREIGN KEY (maNhanVien) REFERENCES NhanVien(maNhanVien) on delete cascade
 )
 

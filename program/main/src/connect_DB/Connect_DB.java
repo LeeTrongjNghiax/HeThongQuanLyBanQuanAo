@@ -14,7 +14,7 @@ public class Connect_DB {
 	public void connect() {
 		String url = "jdbc:sqlserver://localhost:1433;encrypt=true;trustServerCertificate=true;databaseName=QuanLyCuaHangBanQuanAo";
 		String user = "sa";
-		String password = "123";
+		String password = "12";
 		
 		try {
 			con = DriverManager.getConnection(url, user, password);
