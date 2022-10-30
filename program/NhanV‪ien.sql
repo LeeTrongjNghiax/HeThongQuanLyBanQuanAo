@@ -1,15 +1,19 @@
-INSERT INTO NhanVien(maNhanVien, tenNhanVien, ngaySinh, gioiTinh, diaChi, soDienThoai, email, ngayVaoLam, chucVu, chungMinhNhanDan) VALUES
-('NV001', N'Nguyễn Đức Long', '01/01/2002', 1, '114/64 Van Kiep', '0764670490', 'longbao@gmail.com', '03/10/2022', 'Quản lí', '565278468568'),
-('NV002', N'Lê Trọng Nghĩa', '07/03/2002', 1, '45/1 Đinh Bộ Lĩnh', '0764670499', 'leetrongjnghiax0938225745@gmail.com', '03/10/2022', 'Nhân viên', '232347052039'),
-('NV003', N'Nguyễn Quang Toán', '02/10/2002', 1, '34/1 DH Cong Nghiep', '0764670492', 'toanlmao@gmail.com', '03/10/2022', 'Nhân viên', '851855948331'),
-('NV004', N'Mai Thị Thu Thúy', '10/10/2007', 1, '14/1000 Nơ Trang Long', '0764670493', 'maithuy@gmail.com', '01/10/2022', 'Giám đốc trưởng', '596859921815')
+USE QuanLyCuaHangBanQuanAo;
+GO
 
-INSERT INTO TaiKhoan(tenTaiKhoan, matKhau, maKhachHang, maNhanVien) VALUES
-('nguyenduclong1234', '123456', '', 'NV001'),
-('leetrongjnghiax0938225745', '123456', '', 'NV002'),
-('toanmicay', '123456', '', 'NV003'),
-('chothuy', '123456', '', 'NV004'),
+INSERT INTO NhanVien values 
+('NV0001', N'Nguyễn Đức Long', '0789112534', 1, '2002-12-08','longbao@gmail.com','2021-07-11','231478992136',N'Quản lí',N'Quảng Nam','Tam Ky','Núi Thanh Hội An','')
+INSERT INTO NhanVien values 
+('NV0002', N'Nguyễn Quang Toán', '0326978123', 1, '2002-02-12','tonnguyen@gmail.com','2021-07-11','281476322137',N'Nhân viên bán hàng',N'Quảng Nam','Tam Ky','Núi Thanh Hội An','')
+INSERT INTO NhanVien values 
+('NV0003', N'Lê Trọng Nghĩa', '0789112534', 1, '2002-07-07','nghiaabc@gmail.com','2021-07-11','231478992144',N'Quản lí',N'Quảng Nam','Tam Ky','Núi Thanh Hội An','')
+INSERT INTO NhanVien values 
+('NV0004', N'Mai Thị Thu Thúy', '0789112534', 0, '2002-09-28','thybling@gmail.com','2021-07-11','2314666661',N'Quản lí',N'Quảng Nam','Tam Ky','Núi Thanh Hội An','')
+GO
 
-SELECT * FROM NhanVien
-
-SELECT * FROM TaiKhoan
+INSERT INTO TaiKhoan VALUES
+('nguyenduclong1234', '123456', 'NV0001'),
+('leetrongjnghiax0938225745', '123456', 'NV0002'),
+('toanmicay', '123456', 'NV0003'),
+('chothuy', '123456', 'NV0004')
+GO
