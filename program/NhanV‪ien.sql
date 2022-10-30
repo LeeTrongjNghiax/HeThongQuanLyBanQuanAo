@@ -17,3 +17,5 @@ INSERT INTO TaiKhoan VALUES
 ('toanmicay', '123456', 'NV0003'),
 ('chothuy', '123456', 'NV0004')
 GO
+
+select * from TaiKhoan

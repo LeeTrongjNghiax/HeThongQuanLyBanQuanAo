@@ -3,7 +3,7 @@ CREATE DATABASE QuanLyCuaHangBanQuanAo;
 USE QuanLyCuaHangBanQuanAo;
 
 CREATE TABLE NhanVien(
-	maNhanVien NVARCHAR(6) PRIMARY KEY,
+	maNhanVien NVARCHAR(30) PRIMARY KEY,
 	tenNhanVien NVARCHAR(100) NOT NULL,
 	soDienThoai NVARCHAR(10) NOT NULL,
 	gioiTinh BIT NOT NULL,
@@ -17,7 +17,7 @@ CREATE TABLE NhanVien(
 	huyen NVARCHAR(100) NOT NULL,
 	diaChi NVARCHAR(100) NOT NULL
 )
-GO
+
 
 CREATE TABLE KhachHang(
 	maKhachHang NVARCHAR(30) PRIMARY KEY,
@@ -32,10 +32,7 @@ CREATE TABLE KhachHang(
 CREATE TABLE TaiKhoan(
 	tenTaiKhoan NVARCHAR(30) PRIMARY KEY,
 	matKhau NVARCHAR(50) NOT NULL,
-	maKhachHang NVARCHAR(30) NOT NULL,
 	maNhanVien NVARCHAR(30) NOT NULL,
-
-	FOREIGN KEY (maKhachHang) REFERENCES KhachHang(maKhachHang) on delete cascade,
 	FOREIGN KEY (maNhanVien) REFERENCES NhanVien(maNhanVien) on delete cascade
 )
 
