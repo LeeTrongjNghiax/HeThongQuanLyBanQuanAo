@@ -42,10 +42,10 @@ import com.toedter.calendar.JCalendar;
 import com.toedter.calendar.JDateChooser;
 
 import DAO.NhanVien_DAO;
+import connect_DB.Connect_DB;
 import entity.NhanVien;
 
 //import connect.connectDB;
-import DAO.NhanVien_DAO;
 //import entity.NhanVien;
 
 public class GUI_QuanLiNhanVienQL extends JPanel implements ActionListener,MouseListener {
@@ -79,13 +79,8 @@ public class GUI_QuanLiNhanVienQL extends JPanel implements ActionListener,Mouse
 
 
 	public GUI_QuanLiNhanVienQL() {
-//		try {
-//			connectDB.getInstance().connect();
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//			System.out.println("Kết nối thành công");
-//		}
-//
+		Connect_DB.getInstance().connect();
+
 		nv_DAO = new NhanVien_DAO();
 		panelNhanVien();
 		setBackground(new Color(147, 190, 221));

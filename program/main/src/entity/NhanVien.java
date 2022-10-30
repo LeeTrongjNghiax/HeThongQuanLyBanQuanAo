@@ -17,9 +17,9 @@ public class NhanVien {
 	public NhanVien() {
 		super();
 	}
-	
+	// String phuong, String quan, String thanhPho,
 	public NhanVien(String maNhanVien, String tenNhanVien, Date ngaySinh, boolean gioiTinh, String diaChi,
-			String phuong, String quan, String thanhPho, String chungMinhNhanDan, String sDT, String email,
+			 String chungMinhNhanDan, String sDT, String email,
 			Date ngayVaoLam, String chucVu) {
 		super();
 		this.maNhanVien = maNhanVien;
@@ -27,14 +27,15 @@ public class NhanVien {
 		this.ngaySinh = ngaySinh;
 		this.gioiTinh = gioiTinh;
 		this.diaChi = diaChi;
-		this.phuong = phuong;
-		this.quan = quan;
-		this.thanhPho = thanhPho;
-		this.chungMinhNhanDan = chungMinhNhanDan;
+		// this.phuong = phuong;
+		// this.quan = quan;
+		// this.thanhPho = thanhPho;
 		this.sDT = sDT;
 		this.email = email;
-		this.ngayVaoLam = ngayVaoLam;
 		this.chucVu = chucVu;
+		this.ngayVaoLam = ngayVaoLam;
+		this.chungMinhNhanDan = chungMinhNhanDan;
+
 	}
 	
 	public String getMaNhanVien() {
