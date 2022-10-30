@@ -21,7 +21,8 @@ CREATE TABLE KhachHang(
 	gioiTinh BIT NOT NULL,
 	soDienThoai NVARCHAR(10) NOT NULL,
 	ngaySinh DATE NOT NULL,
-	email NVARCHAR(100) NOT NULL
+	email NVARCHAR(100) NOT NULL,
+	diemTichLuy INT NOT NULL
 )
 
 CREATE TABLE TaiKhoan(
