@@ -13,7 +13,7 @@ public class ThongKeSoLuongSanPham_Dao {
 	
 	public ArrayList<ThongKeSoLuongSanPham> ThongKeSoLuongSp(String loai,Object ngayMoc, Object NgayHan){
 		ArrayList<ThongKeSoLuongSanPham> lSanPhams = new ArrayList<>();
-		Connection con = Connect_DB.getInstance().getConnection();
+		Connection con = new Connect_DB().getConnect();
 		String sqlString = "select SanPham.tenSanPham, SUM(ChiTietHoaDon.soLuong),SUM(HoaDon.tienNhan)"
 				+ " from ChiTietHoaDon inner join SanPham on ChiTietHoaDon.maSanPham = SanPham.maSanPham  "
 				+ "inner join LoaiSanPham on LoaiSanPham.maLoaiSanPham = SanPham.maLoaiSanPham "
@@ -46,7 +46,7 @@ public class ThongKeSoLuongSanPham_Dao {
 //		System.out.println(loai);
 //		System.out.println(ngayMoc);
 //		System.out.println(NgayHan);
-		Connection con = Connect_DB.getInstance().getConnection();
+		Connection con = new Connect_DB().getConnect();
 		String sqlTOPString = "\r\n"
 				+ "select SanPham.tenSanPham, SUM(ChiTietHoaDon.soLuong),SUM(HoaDon.tienNhan)  tienban\r\n"
 				+ "from ChiTietHoaDon inner join SanPham \r\n"

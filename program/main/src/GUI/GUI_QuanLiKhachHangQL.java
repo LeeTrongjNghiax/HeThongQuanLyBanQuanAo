@@ -56,6 +56,7 @@ public class GUI_QuanLiKhachHangQL extends JPanel implements ActionListener, Mou
 
 	}
 	private void panelKhachHang() {
+		setLayout(new BorderLayout());
 		Box b = Box.createVerticalBox();
 		Box bcenter = Box.createHorizontalBox();
 		Box b0, b1,b2;
@@ -114,7 +115,7 @@ public class GUI_QuanLiKhachHangQL extends JPanel implements ActionListener, Mou
 		b2.add(txtEmail);
 		txtEmail.setPreferredSize(new Dimension(100, 25));
 		b.add(Box.createVerticalStrut(10));
-		add(b);
+		add(b, BorderLayout.CENTER);
 
 		// table
 		b.add(Box.createVerticalStrut(5));

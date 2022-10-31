@@ -3,6 +3,14 @@ package entity;
 import java.sql.Date;
 
 public class NhanVien {
+	@Override
+	public String toString() {
+		return "NhanVien [maNhanVien=" + maNhanVien + ", tenNhanVien=" + tenNhanVien + ", ngaySinh=" + ngaySinh
+				+ ", gioiTinh=" + gioiTinh + ", diaChi=" + diaChi + ", phuong=" + phuong + ", quan=" + quan
+				+ ", thanhPho=" + thanhPho + ", chungMinhNhanDan=" + chungMinhNhanDan + ", sDT=" + sDT + ", email="
+				+ email + ", ngayVaoLam=" + ngayVaoLam + ", chucVu=" + chucVu + "]";
+	}
+
 	private String maNhanVien;
 	private String tenNhanVien;
 	private Date ngaySinh;
@@ -37,79 +45,79 @@ public class NhanVien {
 		this.chungMinhNhanDan = chungMinhNhanDan;
 
 	}
-	
+
 	public String getMaNhanVien() {
 		return maNhanVien;
 	}
-	
+
 	public void setMaNhanVien(String maNhanVien) {
 		this.maNhanVien = maNhanVien;
 	}
-	
+
 	public String getTenNhanVien() {
 		return tenNhanVien;
 	}
-	
+
 	public void setTenNhanVien(String tenNhanVien) {
 		this.tenNhanVien = tenNhanVien;
 	}
-	
+
 	public Date getNgaySinh() {
 		return ngaySinh;
 	}
-	
+
 	public void setNgaySinh(Date ngaySinh) {
 		this.ngaySinh = ngaySinh;
 	}
-	
+
 	public boolean isGioiTinh() {
 		return gioiTinh;
 	}
-	
+
 	public void setGioiTinh(boolean gioiTinh) {
 		this.gioiTinh = gioiTinh;
 	}
-	
+
 	public String getDiaChi() {
 		return diaChi;
 	}
-	
+
 	public void setDiaChi(String diaChi) {
 		this.diaChi = diaChi;
 	}
-	
+
 	public String getPhuong() {
 		return phuong;
 	}
-	
+
 	public void setPhuong(String phuong) {
 		this.phuong = phuong;
 	}
-	
+
 	public String getQuan() {
 		return quan;
 	}
-	
+
 	public void setQuan(String quan) {
 		this.quan = quan;
 	}
-	
+
 	public String getThanhPho() {
 		return thanhPho;
 	}
-	
+
 	public void setThanhPho(String thanhPho) {
 		this.thanhPho = thanhPho;
 	}
-	
+
 	public String getChungMinhNhanDan() {
 		return chungMinhNhanDan;
 	}
-	
+
 	public void setChungMinhNhanDan(String chungMinhNhanDan) {
 		this.chungMinhNhanDan = chungMinhNhanDan;
 	}
-	
+
 	public String getsDT() {
 		return sDT;
 	}
@@ -121,25 +129,25 @@ public class NhanVien {
 	public String getEmail() {
 		return email;
 	}
-	
+
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
+
 	public Date getNgayVaoLam() {
 		return ngayVaoLam;
 	}
-	
+
 	public void setNgayVaoLam(Date ngayVaoLam) {
 		this.ngayVaoLam = ngayVaoLam;
 	}
-	
+
 	public String getChucVu() {
 		return chucVu;
 	}
-	
+
 	public void setChucVu(String chucVu) {
 		this.chucVu = chucVu;
 	}
 	
-}
+	}
