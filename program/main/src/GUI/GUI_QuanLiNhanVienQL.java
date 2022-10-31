@@ -66,7 +66,7 @@ public class GUI_QuanLiNhanVienQL extends JPanel implements ActionListener,Mouse
 	private JComboBox<String> cbQuan;
 	private JComboBox<String> cbGioiTinh;
 	private JComboBox<String> cbThanhPho;
-	private NhanVien_DAO nv_DAO;
+	NhanVien_DAO dao=new NhanVien_DAO();
 	Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 	int with = screenSize.width;
 	int height = screenSize.height;
@@ -75,6 +75,7 @@ public class GUI_QuanLiNhanVienQL extends JPanel implements ActionListener,Mouse
 
 	//private Date dateNgaySinh;
 	//private Date dateNgayVaoLam;
+	NhanVien_DAO nvdao = new NhanVien_DAO();
 	private String Strname;
 
 
@@ -86,12 +87,13 @@ public class GUI_QuanLiNhanVienQL extends JPanel implements ActionListener,Mouse
 //			System.out.println("Kết nối thành công");
 //		}
 //
-		nv_DAO = new NhanVien_DAO();
 		panelNhanVien();
 		setBackground(new Color(147, 190, 221));
 
 	}
 	private void panelNhanVien() {
+		setLayout(new BorderLayout());
+		
 		// TODO Auto-generated method stub
 		Box b = Box.createVerticalBox();
 		Box bcenter = Box.createHorizontalBox();
@@ -193,29 +195,37 @@ public class GUI_QuanLiNhanVienQL extends JPanel implements ActionListener,Mouse
 		cbThanhPho.addItem("Phú Yên");
 		cbThanhPho.addItem("Đà Nẵng");
 		
-		cbThanhPho.setPreferredSize(new Dimension(100,25));
+		cbThanhPho.setPreferredSize(new Dimension(170,25));
 		b3.add(lblThanhPho);
 		b3.add(cbThanhPho);
 		// quận/huyện
 		JLabel lblQuan = new JLabel("Quận/Huyện: ");
 		cbQuan = new JComboBox();
-		cbQuan.setPreferredSize(new Dimension(100,25));
+		
 		cbQuan.addItem("Gò Vấp");
 		cbQuan.addItem("An Nhơn");
 		cbQuan.addItem("Phù Mỹ");
+		cbQuan.addItem("Tam Ky");
+		cbQuan.setPreferredSize(new Dimension(170,25));
 		
 		b3.add(lblQuan);
 		b3.add(cbQuan);
 		// phường/xã
 		JLabel lblPhuong = new JLabel("Phường/Xã: ");
 		cbPhuong = new JComboBox();
-		cbPhuong.setPreferredSize(new Dimension(100,25));
+		
+		cbPhuong.addItem("Nhơn Hòa");
 		cbPhuong.addItem("Nhơn Tân");
 		cbPhuong.addItem("Nhơn Thọ");
 		cbPhuong.addItem("Nhơn Lộc");
 		cbPhuong.addItem("Nhơn Khánh");
 		cbPhuong.addItem("Nhơn Mỹ");
-		cbPhuong.addItem("Nhơn Hòa");
+		cbPhuong.addItem("Núi Thanh Hội An");
+		
+		
+		
+		cbPhuong.setPreferredSize(new Dimension(170,25));
+		
 		b3.add(lblPhuong);
 		b3.add(cbPhuong);
 		// địa chỉ
@@ -223,17 +233,16 @@ public class GUI_QuanLiNhanVienQL extends JPanel implements ActionListener,Mouse
 		txtDiaChi = new JTextField();
 		b3.add(lblDiachi);
 		b3.add(txtDiaChi);
-		txtDiaChi.setPreferredSize(new Dimension(100, 25));
+		txtDiaChi.setPreferredSize(new Dimension(70, 25));
 		b.add(Box.createVerticalStrut(20));
-		add(b);
+		add(b,BorderLayout.CENTER);
 		b.add(Box.createVerticalStrut(10));
 		// table
 		bcenter.add(bcenter = Box.createVerticalBox());
 		String header[] = {"Mã nhân viên","Tên nhân viên","Số Điện Thoại","Giới Tính","Ngày Sinh","Email","Ngày vào làm","CMND","Chức vụ","Thành Phố","Quận/Huyện","Phường/Xã","Địa chỉ"};
 		model = new DefaultTableModel(header,0);
-
-		JScrollPane scroll = new JScrollPane();
-		scroll.setViewportView(tableNhanVien = new JTable(model));
+		tableNhanVien = new JTable(model);
+		JScrollPane scroll = new JScrollPane(tableNhanVien);
 		scroll.setPreferredSize(new Dimension(with, 520));
 
 		tableNhanVien.setRowHeight(30);
@@ -273,6 +282,7 @@ public class GUI_QuanLiNhanVienQL extends JPanel implements ActionListener,Mouse
 
 		lblNgaySinh.setPreferredSize(lblMaNV.getPreferredSize());
 		lblChucVu.setPreferredSize(lblMaNV.getPreferredSize());
+		txtMaNV.setEditable(false);
 		// sự kiện 
 		tableNhanVien.addMouseListener(this);
 		btnThem.addActionListener(this);
@@ -280,15 +290,18 @@ public class GUI_QuanLiNhanVienQL extends JPanel implements ActionListener,Mouse
 		btnXoa.addActionListener(this);
 		btnTim.addActionListener(this);
 		btnLamMoi.addActionListener(this);
-		docDuLieuDatabaseVaoTable();
+		try {
+			loadDuLieu();
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
 		int row =tableNhanVien.getSelectedRow();
-//		NhanVien nv  = new NhanVien();
-
 		if(row>=0) {
 			txtMaNV.setText(tableNhanVien.getValueAt(row, 0).toString());
 			txtTenNV.setText(tableNhanVien.getValueAt(row, 1).toString());
@@ -303,9 +316,9 @@ public class GUI_QuanLiNhanVienQL extends JPanel implements ActionListener,Mouse
 			Date datengayssinh = new Date(year-1900, month-1, day);
 			ngaySinh.setDate(datengayssinh);
 			
-			System.out.println(year);
-			System.out.println(month);
-			System.out.println(day);
+//			System.out.println(year);
+//			System.out.println(month);
+//			System.out.println(day);
 			
 			txtEmail.setText(tableNhanVien.getValueAt(row, 5).toString());
 			
@@ -317,18 +330,21 @@ public class GUI_QuanLiNhanVienQL extends JPanel implements ActionListener,Mouse
 		
 			Date datevaolam = new Date(year1-1900, month1-1, day1);
 			ngayVaoLam.setDate(datevaolam);
-	
-			System.out.println(year1);
-			System.out.println(month1);
-			System.out.println(day1);
+//	
+//			System.out.println(year1);
+//			System.out.println(month1);
+//			System.out.println(day1);
 			
 			txtCMND.setText(tableNhanVien.getValueAt(row, 7).toString());
+			
 			cbChucVu.setSelectedItem(tableNhanVien.getValueAt(row, 8).toString());
-			cbThanhPho.setSelectedItem(tableNhanVien.getValueAt(row, 9).toString());
-			cbQuan.setSelectedItem(tableNhanVien.getValueAt(row, 10).toString());
+			String Thanhpho = tableNhanVien.getValueAt(row, 9).toString();	
+			cbThanhPho.setSelectedItem(Thanhpho);
+			String quan = tableNhanVien.getValueAt(row, 10).toString();	
+			System.out.println(quan);
+			cbQuan.setSelectedItem(quan);
 			cbPhuong.setSelectedItem(tableNhanVien.getValueAt(row, 11).toString());
 			txtDiaChi.setText(tableNhanVien.getValueAt(row, 12).toString());
-
 			txtMaNV.requestFocus(getFocusTraversalKeysEnabled());
 
 		}
@@ -364,22 +380,24 @@ public class GUI_QuanLiNhanVienQL extends JPanel implements ActionListener,Mouse
 		// TODO Auto-generated method stub
 		Object o= e.getSource();
 		if(o.equals(btnThem)){
-//			if (validData()==true) {
-//				
-//			}
-			ThemNhanVien();
+			if (validData()) {
+				ThemNhanVien();
+			}
 		}
 		else if(o.equals(btnSua)) {
 			SuaNhanVien();
+		
 		}
 		else if(o.equals(btnXoa)) {
 			XoaNhanVien();
+	
 		}
 		else if(o.equals(btnTim)) {
 			TimNhanVien();
 		}
 		else if(o.equals(btnLamMoi)) {
 			LamMoiNhanVien();
+		
 		}
 	}
 	// xóa rỗng
@@ -389,9 +407,9 @@ public class GUI_QuanLiNhanVienQL extends JPanel implements ActionListener,Mouse
 		txtTenNV.setText("");
 		txtSdt.setText("");
 		cbGioiTinh.setSelectedItem("");
-		ngaySinh.setDateFormatString("");
+		ngaySinh.setDate(null);
 		txtEmail.setText("");
-		ngayVaoLam.setDateFormatString("");
+		ngayVaoLam.setDate(null);
 		txtCMND.setText("");
 		cbChucVu.setSelectedItem("");
 		cbThanhPho.setSelectedItem("");
@@ -426,22 +444,29 @@ public class GUI_QuanLiNhanVienQL extends JPanel implements ActionListener,Mouse
 		}
 		tableNhanVien.setModel(model);
 	}
-	//	public void loadDuLieu() throws SQLException, ClassNotFoundException{
-	//		DAO_NhanVien dao=new DAO_NhanVien();
-	//		ArrayList<NhanVien> list=dao.getAllNhanVien();
-	//		model.setRowCount(0);
-	//		for (NhanVien nhanVien : list) {
-	//			model.addRow(new Object[] {nhanVien.getMaNhanVien(),nhanVien.getTenNhanVien(),nhanVien.getSdt(),nhanVien.isGioiTinh()==false ? "Nam":"Nữ" ,nhanVien.getNgaySinh().toString(),nhanVien.getEmail(),nhanVien.getNgayVaoLam().toString(),nhanVien.getChungMinhNhanDan(),nhanVien.getChucVu(),nhanVien.getThanhPho(),nhanVien.getQuan(),nhanVien.getPhuong(),nhanVien.getDiaChi()});
-	//		}
-	//		tableNhanVien.setModel(model);
-	//		}
+		public void loadDuLieu() throws SQLException, ClassNotFoundException{
+			while (model.getRowCount()!=0) {
+				model.removeRow(0);
+				
+			}
+			for (NhanVien nhanVien : nvdao.getAllNhanVien()) {
+				model.addRow(new Object[] {nhanVien.getMaNhanVien(),nhanVien.getTenNhanVien(),nhanVien.getsDT(),nhanVien.isGioiTinh()==false ? "Nam":"Nữ" ,nhanVien.getNgaySinh().toString(),nhanVien.getEmail(),nhanVien.getNgayVaoLam().toString(),nhanVien.getChungMinhNhanDan(),nhanVien.getChucVu(),nhanVien.getThanhPho(),nhanVien.getQuan(),nhanVien.getPhuong(),nhanVien.getDiaChi()});
+			}
+			tableNhanVien.setModel(model);
+			}
 
 
 	// thêm 
 	private void  ThemNhanVien() {
 
 		try {
-			String Manv = txtMaNV.getText();
+			java.util.Date dateNOW = new java.util.Date();
+			SimpleDateFormat spDateFormat = new SimpleDateFormat("ddMMyyyyhhmmss");
+			System.out.println(dateNOW);
+			String dateString = spDateFormat.format(dateNOW);
+			System.out.println(dateString);
+
+			String Manv = "NV"+dateString;
 			String TenNv = txtTenNV.getText();
 			String sdt = txtSdt.getText();
 			String GioiTinh = cbGioiTinh.getSelectedItem().toString();
@@ -460,18 +485,17 @@ public class GUI_QuanLiNhanVienQL extends JPanel implements ActionListener,Mouse
 			String cmnd = txtCMND.getText();
 			String chucvu = cbChucVu.getSelectedItem().toString();
 			String thanhpho = cbThanhPho.getSelectedItem().toString();			
-			String quan = cbChucVu.getSelectedItem().toString();
+			String quan = cbQuan.getSelectedItem().toString();
 			String Phuong = cbPhuong.getSelectedItem().toString();
 			String diachi = txtDiaChi.getText();
-//			NhanVien nv = new NhanVien(Manv, TenNv, sdt, gt, nsinh, email, nvl, cmnd, chucvu, thanhpho, quan, Phuong, diachi);
-//			System.out.println(nv);
-//			if(nv_dao.createNhanVien(nv)) {
-//				model.addRow(new Object[] {nv.getMaNhanVien(),nv.getTenNhanVien(),nv.getSdt(),nv.isGioiTinh() ? "Nam" : "Nữ"  ,sdf.format(nv.getNgaySinh()) ,nv.getEmail()
-//						,sdf.format(nv.getNgayVaoLam()),nv.getChungMinhNhanDan(),nv.getChucVu(),nv.getThanhPho(),nv.getQuan(),nv.getPhuong(),nv.getDiaChi()});
-//				JOptionPane.showMessageDialog(this, "Thêm nhân viên thành công");
-//			}else {
-//				JOptionPane.showMessageDialog(this, "Thêm nhân viên không thành công");
-//			}
+			NhanVien nv = new NhanVien(Manv, TenNv, nsinh, gt, diachi, Phuong, quan, thanhpho, cmnd, sdt, email, nvl, chucvu);
+			System.out.println(nv.toString());
+			if(nvdao.createNhanVien(nv)) {
+				JOptionPane.showMessageDialog(this, "Thêm nhân viên thành công");
+				loadDuLieu();
+			}else {
+				JOptionPane.showMessageDialog(this, "Thêm nhân viên không thành công");
+			}
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -484,16 +508,21 @@ public class GUI_QuanLiNhanVienQL extends JPanel implements ActionListener,Mouse
 			String maNhanVien =(String) tableNhanVien.getValueAt(row, 0);
 			int mess=JOptionPane.showConfirmDialog(this, "Bạn có chắc là muốn xóa dòng này không???", "Chú ý", JOptionPane.YES_NO_OPTION);
 			if(mess == JOptionPane.YES_OPTION) {
-//				if(nv_dao.deleteNhanVien(maNhanVien)) {
-//					model.removeRow(row);
-//					JOptionPane.showMessageDialog(this, "Xóa nhân viên thành công");
-//				}else {
-//					JOptionPane.showMessageDialog(this, "Xóa nhân viên  không thành công");
-//				}
-
-
+				if(nvdao.deleteNhanVien(maNhanVien)) {
+					model.removeRow(row);
+					JOptionPane.showMessageDialog(this, "Xóa nhân viên thành công");
+					try {
+						loadDuLieu();
+					} catch (ClassNotFoundException | SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}else {
+					JOptionPane.showMessageDialog(this, "Xóa nhân viên  không thành công");
+				}
 			}
 		}
+		
 
 	}
 //	//sửa 
@@ -520,23 +549,12 @@ public class GUI_QuanLiNhanVienQL extends JPanel implements ActionListener,Mouse
 			nv.setPhuong(cbPhuong.getSelectedItem().toString());
 			nv.setDiaChi(txtDiaChi.getText());
 
-//			if(nv_DAO.upDateNhanVien(nv)) {
-//				tableNhanVien.setValueAt(txtTenNV.getText(),row,1);
-//				tableNhanVien.setValueAt(txtSdt.getText(),row,2);
-//				tableNhanVien.setValueAt(cbGioiTinh.getSelectedItem().toString(),row,3);
-//				tableNhanVien.setValueAt(ngaySinh.getDate(),row,4);
-//				tableNhanVien.setValueAt(txtEmail.getText(),row,5);
-//				tableNhanVien.setValueAt(ngayVaoLam.getDate(),row,6);
-//				tableNhanVien.setValueAt(txtCMND.getText(),row,7);
-//				tableNhanVien.setValueAt(cbChucVu.getSelectedItem().toString(),row,8);
-//				tableNhanVien.setValueAt(cbThanhPho.getSelectedItem().toString(),row,9);
-//				tableNhanVien.setValueAt(cbQuan.getSelectedItem().toString(),row,10);
-//				tableNhanVien.setValueAt(cbPhuong.getSelectedItem().toString(),row,11);
-//				tableNhanVien.setValueAt(txtDiaChi.getText(),row,12);
-//				JOptionPane.showMessageDialog(this, "Cập nhật nhân viên thành công");
-//			}else {
-//				JOptionPane.showMessageDialog(this, "Cập nhật nhân viên không thành công");
-//			}
+			if(nvdao.upDateNhanVien(nv)) {
+//				
+				loadDuLieu();
+			}else {
+				JOptionPane.showMessageDialog(this, "Cập nhật nhân viên không thành công");
+			}
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -574,85 +592,44 @@ public class GUI_QuanLiNhanVienQL extends JPanel implements ActionListener,Mouse
 //		
 //	}
 
-	private boolean validData() {
-		String maNhanVien = txtMaNV.getText().trim();
-		String tenNhanVien = txtTenNV.getText().trim();
-		String sdt = txtSdt.getText().trim();
-		String diachi = txtDiaChi.getText().trim();
-		String chungMinhNhanDan= txtCMND.getText().trim();
-		String email=txtEmail.getText().trim();
-
-		//regex mã
-		if(maNhanVien.length() == 0) {
-			JOptionPane.showMessageDialog(this, "Bắt buộc nhập mã nhân viên");
-			txtMaNV.requestFocus();
+	private boolean validData() {	
+		String ten = txtTenNV.getText();
+		String diachi = txtDiaChi.getText();
+		
+		if (!(ten.length()>0 && ten.matches("[A-Za-z\\s]+"))) {		
+			JOptionPane.showMessageDialog(this,"Tên Không Được Rỗng");
 			return false;
-		}else {
-			if(!(maNhanVien.length() > 0 && maNhanVien.matches("^NV[0-9]{5}$"))) {
-				JOptionPane.showMessageDialog(this, "Nhập mã theo mẫu");
-				txtMaNV.requestFocus();
-				return false;
-			}
-		}
-		// regex tên		
-		if(tenNhanVien.length() == 0) {
-			JOptionPane.showMessageDialog(this, "Bắt buôc nhập họ tên");
-			txtTenNV.requestFocus();
-			return false;
-		}else {
-			if (!(tenNhanVien.length() > 0 && tenNhanVien.matches("[A-Z][a-z]*([\\sA-Za-z]*)*"))) {		
-				JOptionPane.showMessageDialog(this,"Tên Không Được Rỗng Và Kí Tự Phải Lớn Hơn 0 bắt đầu là kí tự hoa");
-				txtTenNV.requestFocus();
-			} 
-		}
-		// regex số điện thoại
-		if(sdt.length() == 0) {
-			JOptionPane.showMessageDialog(this, "Bắt buôc nhập số điện thoại");
-			txtSdt.requestFocus();
-			return false;
-		}else {	
-			if(!(sdt.length() > 0 && sdt.matches("[0-9]{10}"))) {
-				JOptionPane.showMessageDialog(this, "Không được nhập chữ và nhập 10 số");
+		} 
+		if(txtSdt.getText().length()  <= 0 ){
+				JOptionPane.showMessageDialog(this, "Không được rỗng");
 				txtSdt.requestFocus();
 				return false;
-			}
 		}
-		// regex chứng mình nhân dân 
-		if(chungMinhNhanDan.length()==0) {
-			JOptionPane.showMessageDialog(this, "Bắt buộc nhập chứng minh nhân dân nhân viên");
-			txtCMND.requestFocus();
+		if(!(txtSdt.getText().matches("[0][0-9]{9}"))){
+			JOptionPane.showMessageDialog(this, " số đầu tiên là số 0 tối đa nhập 10 số");			
 			return false;
-		}else {
-			if(!(chungMinhNhanDan.length() > 0 && chungMinhNhanDan.matches("[0-9]{9}"))) {
-				JOptionPane.showMessageDialog(this, "CMND không được nhập chữ và nhập 9 số");
-				txtCMND.requestFocus();
+		}
+		if(txtCMND.getText().length() <= 0) {
+				JOptionPane.showMessageDialog(this, "CMND không được nhập chữ ");
 				return false;
-			}
-			// regex địa chỉ
-			if(diachi.length() == 0 ) {
-				JOptionPane.showMessageDialog(this, "Bắt buộc nhập địa chỉ nhân viên");
-				txtDiaChi.requestFocus();
-				return false;
-			}else {
-				if(txtDiaChi.getText().length() > 0 && !(txtDiaChi.getText().matches("[A-Za-z0-9][A-Za-z0-9]*([\\sA-Za-z0-9]*)*"))) {
-					JOptionPane.showMessageDialog(this,"Địa chỉ không được rỗng không chứa kí tự đặt biệt");
+		}
+		if(!(txtCMND.getText().matches("\\d{9}"))) {
+			JOptionPane.showMessageDialog(this, "CMND không được nhập chữ và nhập 9 số");
+			return false;
+		}
+		if(txtEmail.getText().length() <= 0) {
+					JOptionPane.showMessageDialog(this,"Email không được rỗng");
 					return false;
-				}
-			}
-			// regex Email 
-			if(email.length() == 0 ) {
-				JOptionPane.showMessageDialog(this, "Bắt buộc nhập email nhân viên");
-				txtEmail.requestFocus();
-				return false;
-			}else {
-				if(txtEmail.getText().length() > 0 && !(txtEmail.getText().matches("^[A-Za-z0-9]{4}([A-Za-z0-9])*[@]([gmail|yahoo])[.](com)$"))) {
-					JOptionPane.showMessageDialog(this,"Email không được rỗng ít nhất tên mail phải 5 kí tự, định dạng xxxxx@gmail.com hoặc @yahoo.com");
+		}	
+		if(!(txtEmail.getText().matches("^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}$"))) {
+			JOptionPane.showMessageDialog(this,"ít nhất tên mail phải 4 kí tự trở lên ");
+			return false;
+		}	
+		if(!(diachi.length()>0&&diachi.matches("[A-Za-z0-9\s]+"))) {
+					JOptionPane.showMessageDialog(this,"Địa chỉ không được rỗng");
 					return false;
-				}
-			}
-			return true;
+		}		
+		return true;
 
 		}
-
-	}
 }

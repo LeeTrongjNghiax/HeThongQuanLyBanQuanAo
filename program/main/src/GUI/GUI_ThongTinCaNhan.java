@@ -144,20 +144,20 @@ public class GUI_ThongTinCaNhan extends JPanel implements ActionListener{
 		JTextField txtcmnd = new JTextField();
 		b4.add(lbcmnd);
 		b4.add(txtcmnd);
-		JLabel lbngaycap = new JLabel("Ngày Cấp: ");
-		JDateChooser DateNgayCap = new JDateChooser();
-		b4.add(lbngaycap);
-		b4.add(DateNgayCap);
-		JLabel lbnoicap = new JLabel("Nơi Cấp: ");
-		JTextField txtnoicap = new JTextField();
-		b4.add(lbnoicap);
-		b4.add(txtnoicap);
-		
+//		JLabel lbngaycap = new JLabel("Ngày Cấp: ");
+//		JDateChooser DateNgayCap = new JDateChooser();
+//		b4.add(lbngaycap);
+//		b4.add(DateNgayCap);
+//		JLabel lbnoicap = new JLabel("Nơi Cấp: ");
+//		JTextField txtnoicap = new JTextField();
+//		b4.add(lbnoicap);
+//		b4.add(txtnoicap);
+//		
 		b.add(Box.createVerticalStrut(30));
 		b.add(b5 = Box.createVerticalBox());
 		
 	
-		b5.add(Box.createVerticalStrut(20));
+		b5.add(Box.createVerticalStrut(90));
 		b5.add(b6 = Box.createHorizontalBox());
 		
 		JLabel lbmaNV = new JLabel("Mã Nhân Viên: ");
@@ -175,12 +175,13 @@ public class GUI_ThongTinCaNhan extends JPanel implements ActionListener{
 		JComboBox cbbchucvu = new JComboBox();
 		b7.add(lbChucVu);
 		b7.add(cbbchucvu);
+		cbbchucvu.setPreferredSize(new Dimension(100,60));
 		b7.add(Box.createHorizontalStrut(1000));
 		b5.add(Box.createVerticalStrut(100));
 		
 		
 		
-		b.add(Box.createVerticalStrut(10));
+		b.add(Box.createVerticalStrut(30));
 		add(b,BorderLayout.CENTER);
 		btnsua = new Button("Sửa");
 		btnluu = new Button("Lưu");

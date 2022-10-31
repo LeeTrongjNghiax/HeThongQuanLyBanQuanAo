@@ -28,7 +28,7 @@ INSERT INTO ChiTietSanPham(mauSac, kichCo, soLuong, giaNhap, maSanPham) VALUES
 ('trắng', 'XL', 20, 181000, 'AT001')
 
 INSERT INTO SanPham VALUES
-('ASM002', 'Áo Sơ Mi Tay Dài Sợi Modal Tối Giản M11', 'Kate', 'Tay dài', 1, 'cái', 'Thành phần: 12% modal và 88% superfine\n- Ít nhăn và dễ ủi\n- Nhanh khô và thoáng mát\nHDSD:\n- Áo sơ mi màu phơi trong bóng râm để tránh bạc màu phần vai áo\n- Áo sơ mi trắng có thể phơi ngoài nắng để áo trắng sáng hơn ( không phơi quá lâu )',
+('ASM002',N 'Áo Sơ Mi Tay Dài Sợi Modal Tối Giản M11', 'Kate', 'Tay dài', 1, 'cái', 'Thành phần: 12% modal và 88% superfine\n- Ít nhăn và dễ ủi\n- Nhanh khô và thoáng mát\nHDSD:\n- Áo sơ mi màu phơi trong bóng râm để tránh bạc màu phần vai áo\n- Áo sơ mi trắng có thể phơi ngoài nắng để áo trắng sáng hơn ( không phơi quá lâu )',
 'Yame', 'Việt Nam', 'Y Original', '0287307144', 'cskh@yame.vn', 'Việt Nam', '', 'ASM','NV0001')
 
 INSERT INTO ChiTietSanPham(mauSac, kichCo, soLuong, giaNhap, maSanPham) VALUES
