@@ -12,7 +12,7 @@ import entity.ThongKeDoanhThu;
 public class ThongKeDoanhThu_Dao {
 	public ArrayList<ThongKeDoanhThu> thongKeDoanhThuNV(Object NgayMoc,Object ngayDen){
 		ArrayList<ThongKeDoanhThu> tkdt = new ArrayList<>();
-		Connection con = Connect_DB.getInstance().getConnection();
+		Connection con = new Connect_DB().getConnect();
 		String sql = "select Nhanvien.tenNhanVien, COUNT(Hoadon.maNhanVien), sum(Hoadon.tiennhan) as TienNhan from HoaDon INNER JOIN Nhanvien  on Nhanvien.maNhanvien = Hoadon.maNhanvien  where  thoigiantaohoadon  >= "
 				+ "? and "
 				+ "thoigiantaohoadon <= ?  Group By tenNhanVien";
@@ -36,7 +36,7 @@ public class ThongKeDoanhThu_Dao {
 	}
 	public ArrayList<ThongKeDoanhThu> thongKeDoanhThuTOPNV(Object NgayMoc,Object ngayDen){
 		ArrayList<ThongKeDoanhThu> tkdt = new ArrayList<>();
-		Connection con = Connect_DB.getInstance().getConnection();
+		Connection con = new Connect_DB().getConnect();
 		String sql = "select Nhanvien.tenNhanVien, COUNT(Hoadon.maNhanVien), sum(Hoadon.tiennhan) as TienNhan from HoaDon INNER JOIN Nhanvien  on Nhanvien.maNhanvien = Hoadon.maNhanvien  where  thoigiantaohoadon  >= "
 				+ "? and "
 				+ "thoigiantaohoadon <= ?  Group By tenNhanVien order by TienNhan";
@@ -60,7 +60,7 @@ public class ThongKeDoanhThu_Dao {
 	}
 	public ArrayList<ThongKeDoanhThu> thongKeDoanhThuKH(Object NgayMoc,Object ngayDen){
 		ArrayList<ThongKeDoanhThu> tkdt = new ArrayList<>();
-		Connection con = Connect_DB.getInstance().getConnection();
+		Connection con = new Connect_DB().getConnect();
 		String sql = "select KhachHang.tenKhachHang, COUNT(Hoadon.maKhachHang), sum(Hoadon.tiennhan) from HoaDon  \r\n"
 				+ "INNER JOIN\r\n"
 				+ "KhachHang  on KhachHang.maKhachHang = Hoadon.maKhachHang  where  thoigiantaohoadon  >= ? and thoigiantaohoadon <= ?  Group By tenKhachHang";
@@ -84,7 +84,7 @@ public class ThongKeDoanhThu_Dao {
 	}
 	public ArrayList<ThongKeDoanhThu> thongKeTOPDoanhThuKH(Object NgayMoc,Object ngayDen){
 		ArrayList<ThongKeDoanhThu> tkdt = new ArrayList<>();
-		Connection con = Connect_DB.getInstance().getConnection();
+		Connection con = new Connect_DB().getConnect();
 		String sql = "select KhachHang.tenKhachHang, COUNT(Hoadon.maKhachHang), sum(Hoadon.tiennhan) tiennhan from HoaDon  \r\n"
 				+ "INNER JOIN\r\n"
 				+ "KhachHang  on KhachHang.maKhachHang = Hoadon.maKhachHang  where  thoigiantaohoadon  >= ? and thoigiantaohoadon <= ?  Group By tenKhachHang order by tiennhan";

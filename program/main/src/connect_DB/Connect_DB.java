@@ -5,6 +5,11 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class Connect_DB {
+<<<<<<< HEAD
+	public static Connection getConnect() {
+		Connection connect = null;
+		String url ="jdbc:sqlserver://localhost:1433;databaseName=QuanLyCuaHangBanQuanAo";
+=======
 	public static Connection con = null;
 	private static Connect_DB instance = new Connect_DB();	
 	
@@ -16,18 +21,13 @@ public class Connect_DB {
 		String user = "sa";
 		String password = "12";
 		
+>>>>>>> 4d0d792a74bbfbb1cb32e6798ac0df31cb21e9fe
 		try {
-			con = DriverManager.getConnection(url, user, password);
-			System.out.println("Connected");
-		} catch(SQLException e) {
+			connect = DriverManager.getConnection(url, "sa","12");
+		} catch (SQLException e) {
 			e.printStackTrace();
-			System.out.println("Cannot Connect");
 		}
-	}
-	public static Connection getConnection() {
-		return con;
-	}
-	public static void main(String[] args) throws SQLException {
-		Connect_DB.getInstance().connect();
+		return connect;
 	}
 }
+
